@@ -12,7 +12,7 @@ source venv/bin/activate  # Mac/Linux
 
 ## Step 3: Install Dependencies
 ```
-pip install playwright pytest pytest-html requests
+pip install -r requirements.txt
 playwright install
 ```
 
