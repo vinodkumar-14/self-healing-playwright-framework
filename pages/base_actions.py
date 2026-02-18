@@ -156,6 +156,11 @@ class BaseActions:
                     print(f"Retrying with healed locator: {healed_locator}")
                     self.page.click(healed_locator, timeout=5000)
                     print("Self-healing successful ✅")
+                    allure.attach(
+                        str(best_match),
+                        name="Healing Match Info",
+                        attachment_type=allure.attachment_type.TEXT
+                    )
                     return
 
                 print("No strong fuzzy match found. Healing failed.")
