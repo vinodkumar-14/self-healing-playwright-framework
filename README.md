@@ -25,10 +25,10 @@ Install Ollama: https://ollama.com
 ### Run Test
 `ollama run mistral`
 
-### Allure report
+## Step 5: Allure report
 `brew install allure`
 
-### Step5: Run Tests
+## Step 6: Run Tests
 `pytest`
 
 `pytest tests/test_login.py`
