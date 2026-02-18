@@ -26,11 +26,11 @@ Install Ollama: https://ollama.com
 `ollama run mistral`
 
 ### Allure report
-brew install allure
 `brew install allure`
 
 ### Step5: Run Tests
 `pytest`
+
 `pytest tests/test_login.py`
 
 # 🤖 AI-Powered Self-Healing Playwright Framework
