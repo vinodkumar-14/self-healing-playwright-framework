@@ -3,6 +3,7 @@ import allure
 
 from pages.login_page import LoginPage
 
+@allure.id("Test_001")
 @allure.title("Valid Login Test")
 @allure.description("Verify user can login with valid credentials")
 @allure.severity(allure.severity_level.CRITICAL)

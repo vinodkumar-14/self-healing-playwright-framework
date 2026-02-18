@@ -2,12 +2,17 @@
 import subprocess
 import allure
 import pytest
+import shutil
 import os
 
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 
 from ai_agents.failure_analysis_agent import FailureAnalysisAgent
+
+ALLURE_RESULTS_DIR = "allure-results"
+ALLURE_REPORT_DIR = "allure-report"
+ALLURE_HISTORY_DIR = os.path.join(ALLURE_REPORT_DIR, "history")
 
 
 @pytest.fixture(scope="function")
@@ -73,13 +78,37 @@ def pytest_configure(config):
     os.makedirs("reports/screenshots", exist_ok=True)
     os.makedirs("reports/videos", exist_ok=True)
 
+def pytest_sessionstart(session):
+    """
+    Copy previous Allure history before tests start.
+    """
+    if os.path.exists(ALLURE_HISTORY_DIR):
+        history_dst = os.path.join(ALLURE_RESULTS_DIR, "history")
+
+        if os.path.exists(history_dst):
+            shutil.rmtree(history_dst)
+
+        shutil.copytree(ALLURE_HISTORY_DIR, history_dst)
+        print("✅ Allure history copied successfully.")
+    else:
+        print("ℹ️ No previous Allure history found.")
+
 def pytest_sessionfinish(session, exitstatus):
-    if os.path.exists("allure-results"):
-        subprocess.run([
+    """
+    Generate Allure report automatically after tests finish.
+    """
+    print("\n📊 Generating Allure Report...")
+
+    subprocess.run(
+        [
             "allure",
             "generate",
-            "allure-results",
+            ALLURE_RESULTS_DIR,
             "-o",
-            "allure-report",
-            "--clean"
-        ])
+            ALLURE_REPORT_DIR,
+            "--clean",
+        ],
+        check=False,
+    )
+
+    print("✅ Allure report generated successfully.")
