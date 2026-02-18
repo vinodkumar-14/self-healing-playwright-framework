@@ -5,3 +5,8 @@ venv/
 .idea/
 .env
 node_modules/
+allure-results/
+allure-report/
+screenshots/
+videos/
+reports/
