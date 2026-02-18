@@ -78,7 +78,7 @@ class BaseActions:
                     self.page.fill(healed_locator, text, timeout=timeout)
                     print("Self-healing successful ✅")
                     allure.attach(
-                        str(best_match),
+                        str(healed_locator),
                         name="Healing Match Info",
                         attachment_type=allure.attachment_type.TEXT
                     )

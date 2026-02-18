@@ -25,8 +25,13 @@ Install Ollama: https://ollama.com
 ### Run Test
 `ollama run mistral`
 
+### Allure report
+brew install allure
+`brew install allure`
+
 ### Step5: Run Tests
-`pytest tests/test_login.py -v -s`
+`pytest`
+`pytest tests/test_login.py`
 
 # 🤖 AI-Powered Self-Healing Playwright Framework
 
@@ -136,7 +141,3 @@ Original locator:
 
 Actual DOM change:
 #login-button
-
-### Allure report
-brew install allure
-`brew install allure`
