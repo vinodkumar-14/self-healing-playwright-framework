@@ -24,3 +24,6 @@ Install Ollama: https://ollama.com
 `ollama pull mistral`
 ### Run Test
 `ollama run mistral`
+
+### Step5: Run Tests
+`pytest tests/test_login.py -v -s`
