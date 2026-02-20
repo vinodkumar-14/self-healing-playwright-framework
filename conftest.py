@@ -5,13 +5,13 @@ import pytest
 import shutil
 import os
 
-from datetime import datetime
 from playwright.sync_api import sync_playwright
+from datetime import datetime
 
 from ai_agents.failure_analysis_agent import FailureAnalysisAgent
 from config.config_reader import ConfigReader
-from pages.inventory import Inventory
 from pages.login_page import LoginPage
+from pages.inventory import Inventory
 
 ALLURE_RESULTS_DIR = "allure-results"
 ALLURE_REPORT_DIR = "allure-report"
@@ -61,8 +61,8 @@ def login(page, config):
     return LoginPage(page, config)
 
 @pytest.fixture
-def inventory(page):
-    return Inventory(page)
+def inventory(page, config):
+    return Inventory(page, config)
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):

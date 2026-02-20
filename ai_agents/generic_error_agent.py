@@ -1,7 +1,6 @@
 
-# ai_agents/generic_error_agent.py
-
 import json
+
 from core.ai_engine import AIEngine
 
 
@@ -11,14 +10,15 @@ class GenericErrorAgent:
     across the web application.
     """
 
-    def __init__(self):
-        self.engine = AIEngine()
+    def __init__(self, config):
+        self.engine = AIEngine(config)
 
     def analyze(self, context: dict) -> dict:
         prompt = self._build_prompt(context)
         return self.engine.generate(prompt)
 
-    def _build_prompt(self, context: dict) -> str:
+    @staticmethod
+    def _build_prompt(context: dict) -> str:
         return f"""
         You are an AI Test Failure Analyst.
         

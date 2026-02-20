@@ -3,11 +3,12 @@ import allure
 
 from pages.base_actions import BaseActions
 
+
 class Inventory:
 
-    def __init__(self, page):
+    def __init__(self, page, config):
         self.page = page
-        self.actions = BaseActions(page)
+        self.actions = BaseActions(page, config)
 
     @allure.step("Add inventory item and checkout: {inventory_name}")
     def add_inventory_and_checkout(self, inventory_name: str):

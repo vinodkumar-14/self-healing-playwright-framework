@@ -7,6 +7,9 @@ MODEL = "mistral"
 
 class FailureAnalysisAgent:
 
+    def __init__(self, config):
+        self.config = config
+
     @staticmethod
     def classify_failure(locator, error_message):
         """
@@ -58,8 +61,7 @@ class FailureAnalysisAgent:
 
         return "UNKNOWN"
 
-    @staticmethod
-    def suggest_locator(old_locator, dom_buttons):
+    def suggest_locator(self, old_locator, dom_buttons):
         prompt = f"""
         You are a Playwright self-healing engine.
     
@@ -77,7 +79,7 @@ class FailureAnalysisAgent:
         """
 
         response = requests.post(
-            OLLAMA_URL,
+            self.config.ollama_url,
             json={
                 "model": MODEL,
                 "prompt": prompt,

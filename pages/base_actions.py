@@ -5,12 +5,13 @@ from difflib import SequenceMatcher
 
 import allure
 
+
 class BaseActions:
     base_timeout = 5000 # 5 secs
 
-    def __init__(self, page):
+    def __init__(self, page, config):
         self.page = page
-        self.text_validator = IntelligentTextValidator(page)
+        self.text_validator = IntelligentTextValidator(page, config)
 
     @allure.step("Enter text into locator: {locator}")
     def enter_text(self, locator, text, timeout=base_timeout, similarity_threshold: float = 0.75):

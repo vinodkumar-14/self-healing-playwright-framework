@@ -1,8 +1,6 @@
 
 import allure
 
-from config.config_reader import ConfigReader
-
 
 class TestInventory:
 

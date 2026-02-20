@@ -1,8 +1,8 @@
 
-# core/intelligent_text_validator.py
-
-from core.dom_scanner import DOMScanner
 from ai_agents.generic_error_agent import GenericErrorAgent
+from core.dom_scanner import DOMScanner
+
+import allure
 
 
 class IntelligentTextValidator:
@@ -11,10 +11,11 @@ class IntelligentTextValidator:
     Works across entire application.
     """
 
-    def __init__(self, page):
+    def __init__(self, page, config):
         self.page = page
+        self.config = config
         self.dom_scanner = DOMScanner(page)
-        self.ai_agent = GenericErrorAgent()
+        self.ai_agent = GenericErrorAgent(config)
 
     def validate_text(
             self,
@@ -22,6 +23,7 @@ class IntelligentTextValidator:
             expected_text: str,
             parent_locator: str = None
         ):
+        actual_text = None
         try:
             actual_text = self.page.locator(expected_locator).inner_text(timeout=5000)
 
@@ -47,6 +49,21 @@ class IntelligentTextValidator:
         print("\n🧠 AI TEST FAILURE ANALYSIS")
 
         ai_result = self.ai_agent.analyze(context)
+
+        # 📎 Attach screenshot to Allure
+        screenshot_bytes = self.page.screenshot()
+        allure.attach(
+            screenshot_bytes,
+            name="Text Validation Failure Screenshot",
+            attachment_type=allure.attachment_type.PNG
+        )
+
+        # 📎 Attach comparison details
+        allure.attach(
+            f"Expected: {expected_text}\nActual: {actual_text}",
+            name="Validation Details",
+            attachment_type=allure.attachment_type.TEXT
+        )
 
         raise AssertionError(
             f"""

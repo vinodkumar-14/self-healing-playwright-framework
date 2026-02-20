@@ -1,6 +1,4 @@
 
-# core/ai_engine.py
-
 import requests
 import json
 import os
@@ -12,10 +10,10 @@ class AIEngine:
     Ensures structured JSON output and safe parsing.
     """
 
-    def __init__(self, model: str = None):
-        self.url = "http://localhost:11434/api/generate"
+    def __init__(self, config, model: str = None):
+        self.url = config.ollama_url
         # self.url = "http://localhost:11434/api/chat"
-        self.model = model or os.getenv("OLLAMA_MODEL", "mistral:latest")
+        self.model = model or os.getenv(config.ollama_url, config.ollama_model)
 
     def generate(self, prompt: str) -> dict:
         payload = {

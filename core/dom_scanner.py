@@ -1,6 +1,4 @@
 
-# core/dom_scanner.py
-
 
 class DOMScanner:
     """

@@ -2,14 +2,14 @@
 import allure
 
 from pages.base_actions import BaseActions
-from config import config_reader
+
 
 class LoginPage:
 
     def __init__(self, page, config):
         self.page = page
         self.config = config
-        self.actions = BaseActions(page)
+        self.actions = BaseActions(page, config)
 
     def navigate(self):
         self.page.goto(self.config.base_url)

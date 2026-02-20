@@ -25,3 +25,11 @@ class ConfigReader:
     @property
     def password(self):
         return self.config[self.env]["password"]
+
+    @property
+    def ollama_url(self):
+        return self.config[self.env]["ollama"]["url"]
+
+    @property
+    def ollama_model(self):
+        return self.config[self.env]["ollama"]["model"]
