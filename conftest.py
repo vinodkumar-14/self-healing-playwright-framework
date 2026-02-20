@@ -9,6 +9,9 @@ from datetime import datetime
 from playwright.sync_api import sync_playwright
 
 from ai_agents.failure_analysis_agent import FailureAnalysisAgent
+from config.config_reader import ConfigReader
+from pages.inventory import Inventory
+from pages.login_page import LoginPage
 
 ALLURE_RESULTS_DIR = "allure-results"
 ALLURE_REPORT_DIR = "allure-report"
@@ -48,6 +51,18 @@ def page(request):
 
         context.close()
         browser.close()
+
+@pytest.fixture(scope="session")
+def config():
+    return ConfigReader()
+
+@pytest.fixture
+def login(page, config):
+    return LoginPage(page, config)
+
+@pytest.fixture
+def inventory(page):
+    return Inventory(page)
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):

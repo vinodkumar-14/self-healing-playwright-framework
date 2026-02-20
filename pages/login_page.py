@@ -2,35 +2,36 @@
 import allure
 
 from pages.base_actions import BaseActions
-
+from config import config_reader
 
 class LoginPage:
 
-    def __init__(self, page):
+    def __init__(self, page, config):
         self.page = page
+        self.config = config
         self.actions = BaseActions(page)
 
     def navigate(self):
-        self.page.goto("https://www.saucedemo.com")
+        self.page.goto(self.config.base_url)
         self.page.wait_for_load_state("domcontentloaded")
 
-    def login(self, username, password):
+    def login(self, username=None, password=None):
+        username = username or self.config.username
+        password = password or self.config.password
+
         # Intentionally wrong locator
-        self.actions.enter_text("#username", username) # Actual Locator: #user-name
+        self.actions.enter_text("#user-name", username) # Actual Locator: #user-name
 
         self.actions.enter_text("#password", password)
 
         # Intentionally wrong locator
-        self.actions.click("#loginbutton") # Actual Locator: #login-button
+        self.actions.click("#login-button") # Actual Locator: #login-button
 
-        assert 'inventory' in self.page.url
-
-        header = self.page.locator("div.app_logo")
-        header.wait_for(state="visible", timeout=5000)
-        actual_text = header.inner_text().strip()
-        expected_text = "Swag Labs"
-        assert actual_text == expected_text, \
-            f"Login failed. Expected '{expected_text}' but found '{actual_text}'"
+        self.actions.validate_text(
+            expected_locator=".app_logo",
+            expected_text="Swag Labs",
+            parent_locator=".login-box"
+        )
 
         with allure.step('Login to saucedemo successfully.'):
             print('Login to saucedemo successfully.')

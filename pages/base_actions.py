@@ -1,4 +1,6 @@
 
+from core.intelligent_text_validator import IntelligentTextValidator
+
 from difflib import SequenceMatcher
 
 import allure
@@ -8,6 +10,7 @@ class BaseActions:
 
     def __init__(self, page):
         self.page = page
+        self.text_validator = IntelligentTextValidator(page)
 
     @allure.step("Enter text into locator: {locator}")
     def enter_text(self, locator, text, timeout=base_timeout, similarity_threshold: float = 0.75):
@@ -172,3 +175,11 @@ class BaseActions:
             # ❌ If everything fails, raise original error
             print("Raising original exception.")
             raise original_exception
+
+    @allure.step("Validate text: {expected_text}")
+    def validate_text(self, expected_locator, expected_text, parent_locator=None):
+        return self.text_validator.validate_text(
+            expected_locator,
+            expected_text,
+            parent_locator
+        )

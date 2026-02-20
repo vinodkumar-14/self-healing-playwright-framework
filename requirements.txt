@@ -16,6 +16,7 @@ Pygments==2.19.2
 pytest==9.0.2
 pytest-html==4.2.0
 pytest-metadata==3.1.1
+PyYAML==6.0.3
 requests==2.32.5
 typing_extensions==4.15.0
 urllib3==2.6.3
