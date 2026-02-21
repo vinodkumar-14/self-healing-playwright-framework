@@ -23,8 +23,8 @@ class BaseActions:
             print("Starting self-healing process...")
 
             try:
-                # 🔎 Extract clickable elements
-                clickable_elements = self.page.eval_on_selector_all(
+                # 🔎 Extract fillable text elements
+                text_fillable_elements = self.page.eval_on_selector_all(
                     "text, input[type=text]",
                     """
                     elements => elements.map(e => ({
@@ -36,12 +36,12 @@ class BaseActions:
                     """
                 )
 
-                print("Extracted clickable elements:", clickable_elements)
+                print("Extracted text fillable elements:", text_fillable_elements)
 
                 # 🧠 Collect structured candidates
                 candidates = []
 
-                for element in clickable_elements:
+                for element in text_fillable_elements:
                     if element["id"]:
                         candidates.append({"attr": "id", "value": element["id"]})
                     if element["name"]:
