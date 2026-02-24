@@ -34,10 +34,17 @@ class GenericErrorAgent:
         {context['dom'][:3000]}
         
         Analyze why the expected text was not found.
+
+        If an application error message is provided, include it explicitly in your response
+        under the key:
+        
+        Application Error Message (if detected in DOM):
+        {context.get('application_error')}
         
         Return ONLY valid JSON in this exact format:
         
         {{
+          "application_error_message": "<exact UI error message if present, otherwise null>",
           "detected_error": "<short error summary>",
           "suggested_locator": "<better locator if applicable>",
           "reason": "<clear explanation of what happened>"

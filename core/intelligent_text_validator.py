@@ -38,12 +38,14 @@ class IntelligentTextValidator:
 
         scoped_dom = self.dom_scanner.get_scoped_dom(parent_locator)
         error_candidates = self.dom_scanner.find_error_candidates(parent_locator)
+        error_message = self._extract_error_message()
 
         context = {
             "expected_text": expected_text,
             "expected_locator": expected_locator,
             "error_candidates": error_candidates,
-            "dom": scoped_dom
+            "dom": scoped_dom,
+            "application_error": error_message
         }
 
         print("\n🧠 AI TEST FAILURE ANALYSIS")
@@ -72,9 +74,26 @@ class IntelligentTextValidator:
             Expected Text: '{expected_text}'
             Expected Locator: '{expected_locator}'
             
+            Application Error Message: {ai_result.get('application_error_message')}
+            
             Detected Application Error: {ai_result.get('detected_error')}
             Suggested Locator: {ai_result.get('suggested_locator')}
             Reason: {ai_result.get('reason')}
             """
         )
 
+    def _extract_error_message(self):
+        possible_error_locators = [
+            ".error-message-container h3",
+            ".error-message-container",
+            ".error",
+            "[role='alert']",
+            ".error-message"
+        ]
+
+        for locator in possible_error_locators:
+            element = self.page.locator(locator)
+            if element.count() > 0 and element.is_visible():
+                return element.inner_text().strip()
+
+        return None
