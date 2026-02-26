@@ -1,7 +1,7 @@
 
 import allure
 
-from pages.base_actions import BaseActions
+from framework.pages.base_actions import BaseActions
 
 
 class Inventory:

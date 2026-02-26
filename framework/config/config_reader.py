@@ -1,8 +1,10 @@
+
 import yaml
 import os
 
 
 class ConfigReader:
+
     def __init__(self):
         config_path = os.path.join(
             os.path.dirname(__file__),
@@ -31,5 +33,15 @@ class ConfigReader:
         return self.config[self.env]["ollama"]["url"]
 
     @property
+    def headless(self):
+        return self.config[self.env]["headless"]
+
+    @property
     def ollama_model(self):
         return self.config[self.env]["ollama"]["model"]
+
+    def get_password(self):
+        return self.config[self.env]["credentials"]["password"]
+
+    def get_users(self):
+        return self.config[self.env]["credentials"]["users"]

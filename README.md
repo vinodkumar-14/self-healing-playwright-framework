@@ -1,20 +1,27 @@
 ## Step 1: Install Python
-`python3 --version`
-
-## Step 2: Create Virtual Environment
 ```
-mkdir ai_playwright_framework
-cd ai_playwright_framework
+python3 --version
+```
+
+---
+
+## Step 2: Clone and Create Virtual Environment
+```
+git clone https://github.com/vinodkumar-14/ai-playwright-framework.git
 
 python3 -m venv venv
 source venv/bin/activate  # Mac/Linux
 ```
+
+---
 
 ## Step 3: Install Dependencies
 ```
 pip install -r requirements.txt
 playwright install
 ```
+
+---
 
 ## Step 4: Install Ollama (Free Local LLM)
 Install Ollama: https://ollama.com
@@ -25,13 +32,19 @@ Install Ollama: https://ollama.com
 ### Run Test
 `ollama run mistral`
 
+---
+
 ## Step 5: Allure report
 `brew install allure`
+
+---
 
 ## Step 6: Run Tests
 `pytest`
 
 `pytest tests/test_login.py`
+
+---
 
 # 🤖 AI-Powered Self-Healing Playwright Framework
 
@@ -99,45 +112,9 @@ This ensures:
 
 ---
 
-## 🏗 Architecture
-Test Case
+## Articles
 
-↓ 
+[[Part 1] AI-Driven Test Automation: Self-Healing Framework You Can Run, Explore & Help Improve Using Ollama Model](https://www.linkedin.com/posts/vinodkumar-kouthal-692491a1_aitesting-testautomation-playwright-activity-7429927900419801089-rTiI?utm_source=share&utm_medium=member_desktop&rcm=ACoAABWbI44B2EpkSUdfhTGbZePX5mw_MpjwE4E)
 
-Action Layer (click, fill, etc.)
+[[Part 2] AI-Driven Test Automation: Detecting & Analysing Application Error Messages](https://www.linkedin.com/posts/vinodkumar-kouthal-692491a1_testautomation-ai-playwright-activity-7431243984120795137-Z70Q?utm_source=share&utm_medium=member_desktop&rcm=ACoAABWbI44B2EpkSUdfhTGbZePX5mw_MpjwE4E)
 
-↓
-
-Exception Handling
-
-↓
-
-Deterministic Healing (Fuzzy Matching)
-
-↓
-
-AI-Based Analysis (Fallback)
-
-
----
-
-## ✅ Key Features
-
-- Self-healing click mechanism
-- Intelligent DOM extraction
-- Fuzzy similarity matching
-- Structured exception handling
-- AI-powered locator suggestion (fallback)
-- Clean separation of responsibilities
-- CLI-based Git workflow ready
-- Designed for CI/CD compatibility
-
----
-
-## 🔥 Example Healing Scenario
-
-Original locator:
-#loginbutton
-
-Actual DOM change:
-#login-button

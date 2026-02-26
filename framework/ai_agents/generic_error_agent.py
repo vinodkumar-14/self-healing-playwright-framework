@@ -1,7 +1,7 @@
 
 import json
 
-from core.ai_engine import AIEngine
+from framework.core.ai_engine import AIEngine
 
 
 class GenericErrorAgent:

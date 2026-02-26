@@ -1,5 +1,5 @@
 
-from core.intelligent_text_validator import IntelligentTextValidator
+from framework.core.intelligent_text_validator import IntelligentTextValidator
 
 from difflib import SequenceMatcher
 
@@ -17,6 +17,7 @@ class BaseActions:
     def enter_text(self, locator, text, timeout=base_timeout, similarity_threshold: float = 0.75):
         try:
             self.page.fill(locator, text, timeout=timeout)
+            print(f"Clicked text locator: {locator}")
         except Exception as original_exception:
             print("Initial click failed ❌")
             print(f"Error: {original_exception}")

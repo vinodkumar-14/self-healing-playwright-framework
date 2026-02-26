@@ -1,0 +1,36 @@
+name: Self-Healing Playwright CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo:6
+        ports:
+          - 27017:27017
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t self-healing-fw .
+
+      - name: Run Tests in Container
+        run: |
+          docker run \
+            --network host \
+            -e MONGO_URL="mongodb://localhost:27017" \
+            self-healing-fw pytest -v --alluredir=allure-result
+
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results

@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: playwright-test-runner
+spec:
+  template:
+    spec:
+      containers:
+        - name: test-runner
+          image: self-healing-fw:latest
+          env:
+            - name: MONGO_URI
+              value: "mongodb://mongo-service:27017"
+      restartPolicy: Never

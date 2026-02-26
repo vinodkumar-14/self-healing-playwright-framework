@@ -1,0 +1,57 @@
+env: qa
+
+qa:
+  headless: true
+
+  base_url: "https://www.saucedemo.com/"
+  username: "standard_user"
+  password: "secret_sauce"
+
+  credentials:
+    password: "secret_sauce"
+    users:
+      - username: standard_user
+        expected: success
+      - username: locked_out_user
+        expected: locked
+      - username: problem_user
+        expected: success
+      - username: performance_glitch_user
+        expected: performance
+      - username: error_user
+        expected: success
+      - username: visual_user
+        expected: success
+      - username: standard_user
+        expected: invalid_credentails
+
+  ollama:
+    url: "http://localhost:11434/api/generate"
+    model: "mistral"
+
+dev:
+  headless: true
+
+  base_url: "https://dev.saucedemo.com/"
+  username: "dev_user"
+  password: "dev_pass"
+
+  ollama:
+    url: "http://localhost:11434/api/generate"
+    model: "mistral"
+
+  credentials:
+    password: "secret_sauce"
+    users:
+      - username: standard_user
+        expected: success
+      - username: locked_out_user
+        expected: locked
+      - username: problem_user
+        expected: success
+      - username: performance_glitch_user
+        expected: performance
+      - username: error_user
+        expected: success
+      - username: visual_user
+        expected: success
